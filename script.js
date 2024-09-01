@@ -1,61 +1,59 @@
-function getComputerChoice () {
-    let ans = Math.random()
-    let result
-    if (ans <= 3) {
-        result = "Rock";
-    } else if (ans > 3 && ans <= 7) {
-        result = "Paper";
-    } else {
-        result = "Scissors";
-    }
+let humanScore = 0;
+let computerScore = 0;
 
-    return result
+function getComputerChoice() {
+    let choice = Math.floor(Math.random() * 100) + 1;
+    
+    if (choice <= 33) {
+        return "rock";
+    } else if (choice > 33 && choice <= 66) {
+        return "paper";
+    } else {
+        return "scissors";
+    }
 }
 
 function getHumanChoice() {
-    let choice = prompt("enter a choice for rock paper scissors!")
-    return choice
+    let choice = prompt("Rock, paper, or scissors?");
+    return choice.toLowerCase();
 }
 
-
-
-
-test();
-
-function test() {
-    let humanChoice = getHumanChoice()
-    let compChoice = getComputerChoice()
-    
-    if (humanChoice == "rock") {
-        if (compChoice == "Rock") {
-            humanChoice = prompt("same choice choose again:");
-        }
-
-        if (compChoice == "Paper") {
-            alert("you lost!");
-        } else if (compChoice == "Scissors"){
-            alert("you won");
-        }
-    } else if (humanChoice == "paper") {
-        if (compChoice == "Paper") {
-            humanChoice = prompt("same choice choose again:");
-        }
-
-        if (compChoice == "Scissors") {
-            alert("you lost!");
-        } else if (compChoice == "Rock"){
-            alert("you won");
-        }
-    } else if (humanChoice == "scissors") {
-        if (compChoice == "Scissors") {
-            humanChoice = prompt("same choice choose again:");
-        }
-
-        if (compChoice == "Rock") {
-            alert("you lost!");
-        } else if (compChoice == "Paper"){
-            alert("you won");
-        }
+function palyRound(humanCoice, computerChoice) {
+    if (humanCoice === computerChoice) {
+        console.log("it's a draw");
+        
+    } else if (
+        (humanCoice === "rock" && computerChoice === "scissors") ||
+        (humanCoice === "paper" && computerChoice === "rock") ||
+        (humanCoice === "scissors" && computerChoice === "paper") 
+    ) {
+        console.log("You win this round!");
+        humanScore++;
+    } else {
+        console.log("computer win this round !");
+        computerScore++;
     }
 }
 
+function playGame() {
+    for (i = 0; i <= 4; i++) {
+        let humanSelection = getHumanChoice();
+        let computerSelection = getComputerChoice();
+
+        palyRound(humanSelection, computerSelection);
+        console.log(`Your score is : ${humanScore} and the Computer score is : ${computerScore}`);
+        
+    }
+
+
+    if (humanScore > computerScore) {
+        console.log("YOU WIN!");
+        
+    } else {
+        console.log("YOU LOSE!");
+        
+    }
+}
+
+
+playGame();
